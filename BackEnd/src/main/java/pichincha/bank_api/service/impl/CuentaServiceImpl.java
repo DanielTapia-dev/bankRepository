@@ -29,6 +29,8 @@ public class CuentaServiceImpl implements CuentaService {
         dto.setSaldoInicial(cuenta.getSaldoInicial());
         dto.setEstado(cuenta.getEstado());
         dto.setClienteId(cuenta.getCliente().getId());
+        dto.setClienteNombre(cuenta.getCliente().getNombre());
+        dto.setClienteIdentificacion(cuenta.getCliente().getIdentificacion());
         return dto;
     }
 

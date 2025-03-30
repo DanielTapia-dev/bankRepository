@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pichincha.bank_api.dto.ClienteDTO;
+import pichincha.bank_api.exception.ResourceNotFoundException;
 import pichincha.bank_api.model.Cliente;
 import pichincha.bank_api.repository.ClienteRepository;
 import pichincha.bank_api.service.ClienteService;
@@ -91,6 +92,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void delete(Long id) {
-        clienteRepository.deleteById(id);
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", id));
+        clienteRepository.delete(cliente);
     }
 }

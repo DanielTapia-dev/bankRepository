@@ -1,0 +1,35 @@
+@import "src/styles/variables";
+
+.cuentas-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: $text-color;
+    }
+
+    button.primary {
+      background-color: $primary-color;
+      color: #000;
+    }
+  }
+
+  .search-bar {
+    input {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+}
+
+.icon-button {
+  padding: 2px;
+}

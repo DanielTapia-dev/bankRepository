@@ -22,6 +22,9 @@ public class CuentaDTO {
     @NotNull(message = "El ID del cliente no puede ser nulo")
     private Long clienteId;
 
+    private String clienteNombre;
+    private String clienteIdentificacion;
+
     public CuentaDTO() {}
 
     public Long getId() {
@@ -70,5 +73,21 @@ public class CuentaDTO {
 
     public void setClienteId(Long clienteId) {
         this.clienteId = clienteId;
+    }
+
+    public String getClienteNombre() {
+        return clienteNombre;
+    }
+
+    public void setClienteNombre(String clienteNombre) {
+        this.clienteNombre = clienteNombre;
+    }
+
+    public String getClienteIdentificacion() {
+        return clienteIdentificacion;
+    }
+
+    public void setClienteIdentificacion(String clienteIdentificacion) {
+        this.clienteIdentificacion = clienteIdentificacion;
     }
 }

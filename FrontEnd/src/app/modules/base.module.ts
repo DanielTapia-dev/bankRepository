@@ -9,6 +9,7 @@ import { ClientesModule } from './clientes/clientes.module';
 import { CuentasModule } from './cuentas/cuentas.module';
 import { MovimientosModule } from './movimientos/movimientos.module';
 import { ReportesModule } from './reportes/reportes.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [BaseComponent],
@@ -22,6 +23,7 @@ import { ReportesModule } from './reportes/reportes.module';
     CuentasModule,
     MovimientosModule,
     ReportesModule,
+    SharedModule,
   ],
 })
 export class BaseModule {}

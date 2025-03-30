@@ -1,1 +1,25 @@
-<p>table works!</p>
+<div class="clientes-table">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let col of colLabels">{{ col }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td *ngFor="let col of colNames">
+          {{ item[col] }}
+        </td>
+        <td>
+          <button class="icon-button" title="Editar" (click)="edit(item)">
+            ✏️
+          </button>
+          <button class="icon-button" title="Borrar" (click)="delete(item.id)">
+            🗑️
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

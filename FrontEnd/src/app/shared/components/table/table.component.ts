@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
+  @Input() colLabels: string[] = [];
+  @Input() colNames: string[] = [];
+  @Input() data: any[] = [];
 
-  constructor() { }
+  @Output() onEdit = new EventEmitter<any>();
+  @Output() onDelete = new EventEmitter<number>();
 
-  ngOnInit(): void {
+  constructor() {
+    if (!this.colNames) {
+      this.colNames = this.colLabels;
+    }
   }
 
+  edit(item: any) {
+    this.onEdit.emit(item);
+  }
+
+  delete(id: number) {
+    this.onDelete.emit(id);
+  }
 }
