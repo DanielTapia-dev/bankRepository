@@ -1,0 +1,17 @@
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+button.primary {
+  background-color: $primary-color;
+  color: #000;
+}
+
+button.primary:hover {
+  background-color: $primary-dark;
+}

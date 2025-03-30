@@ -1,0 +1,41 @@
+@import "src/styles/variables";
+
+.sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  border-right: 1px solid $border-color;
+  height: calc(100vh - 60px);
+  padding: 20px 10px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: $text-color;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    img {
+      height: 20px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    &.active,
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+}
