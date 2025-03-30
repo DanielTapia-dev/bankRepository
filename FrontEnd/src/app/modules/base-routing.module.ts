@@ -4,6 +4,7 @@ import { BaseComponent } from './base.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'movimientos',
         component: MovimientosComponent,
+      },
+      {
+        path: 'reportes',
+        component: ReportesComponent,
       },
       {
         path: '',

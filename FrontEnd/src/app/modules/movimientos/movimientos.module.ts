@@ -1,17 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovimientosComponent } from './movimientos/movimientos.component';
 import { MovimientoFormComponent } from './movimiento-form/movimiento-form.component';
-
-
+import { MovimientosComponent } from './movimientos.component';
 
 @NgModule({
-  declarations: [
-    MovimientosComponent,
-    MovimientoFormComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations: [MovimientosComponent, MovimientoFormComponent],
+  imports: [CommonModule],
+  exports: [MovimientosComponent],
 })
-export class MovimientosModule { }
+export class MovimientosModule {}
