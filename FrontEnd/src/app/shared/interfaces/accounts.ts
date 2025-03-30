@@ -1,7 +1,6 @@
-import { Cliente } from './cliente';
 import { Movimiento } from './movimientos';
 
-export interface Cuenta {
+export interface Account {
   id?: number;
   numeroCuenta: string;
   tipoCuenta: string;

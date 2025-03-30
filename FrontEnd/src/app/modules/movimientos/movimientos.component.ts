@@ -23,7 +23,6 @@ export class MovimientosComponent implements OnInit {
   loadCuentas() {
     this.movimientosService.getAll().subscribe((resp) => {
       this.movimientos = resp;
-      console.log(resp);
     });
   }
 
@@ -32,9 +31,14 @@ export class MovimientosComponent implements OnInit {
   }
 
   deleteMovimiento(id: number) {
-    this.movimientosService.delete(id).subscribe(() => {
-      this.alertService.success('Movimiento eliminada');
-      this.loadCuentas();
-    });
+    this.movimientosService.delete(id).subscribe(
+      () => {
+        this.alertService.success('Movimiento eliminada');
+        this.loadCuentas();
+      },
+      (err) => {
+        this.alertService.error('Error: ' + err.error.message);
+      }
+    );
   }
 }

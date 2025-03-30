@@ -3,6 +3,8 @@ package pichincha.bank_api.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pichincha.bank_api.dto.CuentaDTO;
+import pichincha.bank_api.exception.DuplicateResourceException;
+import pichincha.bank_api.exception.ResourceNotFoundException;
 import pichincha.bank_api.model.Cliente;
 import pichincha.bank_api.model.Cuenta;
 import pichincha.bank_api.repository.ClienteRepository;
@@ -62,6 +64,10 @@ public class CuentaServiceImpl implements CuentaService {
 
     @Override
     public CuentaDTO create(CuentaDTO cuentaDTO) {
+        if (cuentaRepository.findByNumeroCuenta(cuentaDTO.getNumeroCuenta()).isPresent()) {
+            throw new DuplicateResourceException("cuenta", "número de cuenta", cuentaDTO.getNumeroCuenta());
+        }
+
         Cuenta cuenta = toEntity(cuentaDTO);
         return toDTO(cuentaRepository.save(cuenta));
     }
@@ -85,6 +91,8 @@ public class CuentaServiceImpl implements CuentaService {
 
     @Override
     public void delete(Long id) {
+        Cuenta cuenta = cuentaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta", "ID", id));
         cuentaRepository.deleteById(id);
     }
 }

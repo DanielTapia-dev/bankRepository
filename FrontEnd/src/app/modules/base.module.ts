@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { HeaderModule } from '../layout/header/header.module';
 import { SidebarModule } from '../layout/sidebar/sidebar.module';
 import { BaseRoutingModule } from './base-routing.module';
-import { ClientesModule } from './clientes/clientes.module';
-import { CuentasModule } from './cuentas/cuentas.module';
 import { MovimientosModule } from './movimientos/movimientos.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { SharedModule } from '../shared/shared.module';
+import { ClientsModule } from './clientes/clients.module';
+import { CuentasModule } from './cuentas/cuentas.module';
 
 @NgModule({
   declarations: [BaseComponent],
@@ -19,7 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     BaseRoutingModule,
     HeaderModule,
     SidebarModule,
-    ClientesModule,
+    ClientsModule,
     CuentasModule,
     MovimientosModule,
     ReportesModule,

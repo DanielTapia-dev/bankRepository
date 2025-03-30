@@ -25,7 +25,6 @@ public class ClienteDTO {
     @NotBlank(message = "El teléfono no puede estar vacío")
     private String telefono;
 
-    @NotBlank(message = "La contraseña no puede estar vacía")
     private String contrasena;
 
     @NotNull(message = "El estado no puede ser nulo")

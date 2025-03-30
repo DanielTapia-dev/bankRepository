@@ -1,0 +1,105 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <div class="form-group">
+    <label>Nombre</label>
+    <input formControlName="nombre" type="text" />
+    <div
+      class="error"
+      *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched"
+    >
+      El nombre es requerido
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <select formControlName="genero">
+      <option value="" disabled selected>Seleccionar un genero</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+      <option value="Otros">Otros</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="form.get('gender')?.invalid && form.get('gender')?.touched"
+    >
+      Gender is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Edad</label>
+    <input formControlName="edad" type="number" />
+    <div
+      class="error"
+      *ngIf="form.get('edad')?.invalid && form.get('edad')?.touched"
+    >
+      Edad requerida y debe ser mayor a 0
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Identificación</label>
+    <input formControlName="identificacion" type="number" />
+    <div
+      class="error"
+      *ngIf="
+        form.get('identificacion')?.invalid &&
+        form.get('identificacion')?.touched
+      "
+    >
+      La identificación es requerida
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Dirección</label>
+    <input formControlName="direccion" type="text" />
+    <div
+      class="error"
+      *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched"
+    >
+      La dirección es requerida
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Teléfono</label>
+    <input formControlName="telefono" type="tel" />
+    <div
+      class="error"
+      *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched"
+    >
+      El teléfono es requerido
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Contraseña</label>
+    <input
+      formControlName="contrasena"
+      type="password"
+      placeholder="Ingrese una nueva contraseña solo si planea cambiarla"
+    />
+    <div
+      class="error"
+      *ngIf="form.get('contrasena')?.invalid && form.get('contrasena')?.touched"
+    >
+      La contraseña es requerida
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Estado</label>
+    <select formControlName="estado">
+      <option [value]="true">Activo</option>
+      <option [value]="false">Inactivo</option>
+    </select>
+  </div>
+
+  <div class="form-actions mt-2">
+    <button class="btn-create mr-1" type="submit" [disabled]="form.invalid">
+      Guardar
+    </button>
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

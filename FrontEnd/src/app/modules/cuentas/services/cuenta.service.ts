@@ -1,31 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cuenta } from 'src/app/shared/interfaces/cuentas';
+import { Account } from 'src/app/shared/interfaces/accounts';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CuentaService {
+export class AccountService {
   private apiUrl = `${environment.apiUrl}/cuentas`;
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Cuenta[]> {
-    return this.http.get<Cuenta[]>(this.apiUrl);
+  getAll(): Observable<Account[]> {
+    return this.http.get<Account[]>(this.apiUrl);
   }
 
-  getById(id: number): Observable<Cuenta> {
-    return this.http.get<Cuenta>(`${this.apiUrl}/${id}`);
+  getById(id: number): Observable<Account> {
+    return this.http.get<Account>(`${this.apiUrl}/${id}`);
   }
 
-  create(cliente: Cuenta): Observable<Cuenta> {
-    return this.http.post<Cuenta>(this.apiUrl, cliente);
+  create(cliente: Account): Observable<Account> {
+    return this.http.post<Account>(this.apiUrl, cliente);
   }
 
-  update(id: number, cliente: Cuenta): Observable<Cuenta> {
-    return this.http.put<Cuenta>(`${this.apiUrl}/${id}`, cliente);
+  update(id: number, cliente: Account): Observable<Account> {
+    return this.http.put<Account>(`${this.apiUrl}/${id}`, cliente);
   }
 
   delete(id: number): Observable<void> {

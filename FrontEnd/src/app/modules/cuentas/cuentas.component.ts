@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Cuenta } from 'src/app/shared/interfaces/cuentas';
-import { CuentaService } from './services/cuenta.service';
+import { Account } from 'src/app/shared/interfaces/accounts';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { AccountService } from './services/cuenta.service';
 
 @Component({
   selector: 'app-cuentas',
   templateUrl: './cuentas.component.html',
   styleUrls: ['./cuentas.component.scss'],
 })
-export class CuentasComponent implements OnInit {
-  cuentas: Cuenta[] = [];
+export class AccountsComponent implements OnInit {
+  accounts: Account[] = [];
 
   constructor(
-    private cuentasService: CuentaService,
+    private accountsService: AccountService,
     private alertService: AlertService
   ) {}
 
@@ -21,20 +21,24 @@ export class CuentasComponent implements OnInit {
   }
 
   loadCuentas() {
-    this.cuentasService.getAll().subscribe((resp) => {
-      this.cuentas = resp;
-      console.log(resp);
+    this.accountsService.getAll().subscribe((resp) => {
+      this.accounts = resp;
     });
   }
 
-  editCuenta(cuenta: Cuenta) {
-    console.log('Editar cliente:', cuenta);
+  editCuenta(account: Account) {
+    console.log('Editar cliente:', account);
   }
 
   deleteCuenta(id: number) {
-    this.cuentasService.delete(id).subscribe(() => {
-      this.alertService.success('Cuenta eliminada');
-      this.loadCuentas();
-    });
+    this.accountsService.delete(id).subscribe(
+      () => {
+        this.alertService.success('Cuenta eliminada');
+        this.loadCuentas();
+      },
+      (err) => {
+        this.alertService.error('Error: ' + err.error.message);
+      }
+    );
   }
 }

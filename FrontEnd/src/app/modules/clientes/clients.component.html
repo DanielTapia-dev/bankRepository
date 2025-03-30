@@ -1,7 +1,7 @@
 <section class="clientes-page">
   <div class="page-header">
     <h2>Clientes</h2>
-    <button class="primary">Nuevo</button>
+    <button class="primary" (click)="newClient()">Nuevo</button>
   </div>
 
   <div class="search-bar">
@@ -25,9 +25,19 @@
       'direccion',
       'telefono'
     ]"
-    [data]="clientes"
-    (onEdit)="editCliente($event)"
-    (onDelete)="deleteCliente($event)"
+    [data]="clients"
+    (onEdit)="editClient($event)"
+    (onDelete)="deleteClient($event)"
   >
   </app-table>
 </section>
+
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-content">
+    <app-client-form
+      [client]="clientSelected"
+      (onSubmit)="saveClient($event)"
+      (onCancel)="closeModal()"
+    ></app-client-form>
+  </div>
+</div>

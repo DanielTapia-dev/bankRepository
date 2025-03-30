@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pichincha.bank_api.dto.ClienteDTO;
+import pichincha.bank_api.exception.DuplicateResourceException;
 import pichincha.bank_api.exception.ResourceNotFoundException;
 import pichincha.bank_api.model.Cliente;
 import pichincha.bank_api.repository.ClienteRepository;
@@ -67,7 +68,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteDTO create(ClienteDTO clienteDTO) {
         if (clienteRepository.findByIdentificacion(clienteDTO.getIdentificacion()).isPresent()) {
-            throw new RuntimeException("Ya existe una persona con esa identificación");
+            throw new DuplicateResourceException("cliente", "identificación", clienteDTO.getIdentificacion());
         }
 
         Cliente cliente = toEntity(clienteDTO);
@@ -78,17 +79,30 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteDTO update(Long id, ClienteDTO clienteDTO) {
         Cliente existente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", id));
+
+        clienteRepository.findByIdentificacion(clienteDTO.getIdentificacion()).ifPresent(otro -> {
+            if (!otro.getId().equals(id)) {
+                throw new DuplicateResourceException("cliente", "identificación", clienteDTO.getIdentificacion());
+            }
+        });
+
         existente.setNombre(clienteDTO.getNombre());
         existente.setGenero(clienteDTO.getGenero());
         existente.setEdad(clienteDTO.getEdad());
         existente.setIdentificacion(clienteDTO.getIdentificacion());
         existente.setDireccion(clienteDTO.getDireccion());
         existente.setTelefono(clienteDTO.getTelefono());
-        existente.setContrasena(passwordEncoder.encode(existente.getContrasena()));
         existente.setEstado(clienteDTO.getEstado());
+
+        if (clienteDTO.getContrasena() != null && !clienteDTO.getContrasena().trim().isEmpty()) {
+            existente.setContrasena(passwordEncoder.encode(clienteDTO.getContrasena()));
+        }
+
         return toDTO(clienteRepository.save(existente));
     }
+
+
 
     @Override
     public void delete(Long id) {

@@ -3,6 +3,7 @@ package pichincha.bank_api.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pichincha.bank_api.dto.MovimientoDTO;
+import pichincha.bank_api.exception.ResourceNotFoundException;
 import pichincha.bank_api.model.Cuenta;
 import pichincha.bank_api.model.Movimiento;
 import pichincha.bank_api.repository.CuentaRepository;
@@ -83,6 +84,8 @@ public class MovimientoServiceImpl implements MovimientoService {
 
     @Override
     public void delete(Long id) {
+        Movimiento movimiento = movimientoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Movimiento", "ID", id));
         movimientoRepository.deleteById(id);
     }
 }

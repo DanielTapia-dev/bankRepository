@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cliente } from 'src/app/shared/interfaces/cliente';
+import { Client } from 'src/app/shared/interfaces/client';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClientesService {
+export class ClientsService {
   private apiUrl = `${environment.apiUrl}/clientes`;
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(this.apiUrl);
+  getAll(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.apiUrl);
   }
 
-  getById(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.apiUrl}/${id}`);
+  getById(id: number): Observable<Client> {
+    return this.http.get<Client>(`${this.apiUrl}/${id}`);
   }
 
-  create(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(this.apiUrl, cliente);
+  create(Client: Client): Observable<Client> {
+    return this.http.post<Client>(this.apiUrl, Client);
   }
 
-  update(id: number, cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.apiUrl}/${id}`, cliente);
+  update(id: number, Client: Client): Observable<Client> {
+    return this.http.put<Client>(`${this.apiUrl}/${id}`, Client);
   }
 
   delete(id: number): Observable<void> {

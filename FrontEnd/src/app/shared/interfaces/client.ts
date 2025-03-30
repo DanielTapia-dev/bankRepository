@@ -1,6 +1,6 @@
-import { Cuenta } from './cuentas';
+import { Account } from './accounts';
 
-export interface Persona {
+export interface Person {
   id: number;
   nombre: string;
   genero: string;
@@ -10,8 +10,8 @@ export interface Persona {
   telefono: string;
 }
 
-export interface Cliente extends Persona {
+export interface Client extends Person {
   contrasena: string;
   estado: boolean;
-  cuentas?: Cuenta[];
+  cuentas?: Account[];
 }
