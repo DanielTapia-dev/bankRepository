@@ -1,6 +1,7 @@
 package pichincha.bank_api.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pichincha.bank_api.dto.ClienteDTO;
 import pichincha.bank_api.model.Cliente;
@@ -15,6 +16,9 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private ClienteDTO toDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
@@ -61,7 +65,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClienteDTO create(ClienteDTO clienteDTO) {
+        if (clienteRepository.findByIdentificacion(clienteDTO.getIdentificacion()).isPresent()) {
+            throw new RuntimeException("Ya existe una persona con esa identificación");
+        }
+
         Cliente cliente = toEntity(clienteDTO);
+        cliente.setContrasena(passwordEncoder.encode(cliente.getContrasena()));
         return toDTO(clienteRepository.save(cliente));
     }
 
@@ -75,7 +84,7 @@ public class ClienteServiceImpl implements ClienteService {
         existente.setIdentificacion(clienteDTO.getIdentificacion());
         existente.setDireccion(clienteDTO.getDireccion());
         existente.setTelefono(clienteDTO.getTelefono());
-        existente.setContrasena(clienteDTO.getContrasena());
+        existente.setContrasena(passwordEncoder.encode(existente.getContrasena()));
         existente.setEstado(clienteDTO.getEstado());
         return toDTO(clienteRepository.save(existente));
     }
