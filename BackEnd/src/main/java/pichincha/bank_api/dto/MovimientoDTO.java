@@ -23,6 +23,11 @@ public class MovimientoDTO {
     @NotNull(message = "El ID de la cuenta no puede ser nulo")
     private Long cuentaId;
 
+    private String numeroCuenta;
+    private Double saldoActual;
+    private String clienteNombre;
+    private Boolean estadoCuenta;
+
     public MovimientoDTO() {}
 
     public Long getId() {
@@ -72,4 +77,16 @@ public class MovimientoDTO {
     public void setCuentaId(Long cuentaId) {
         this.cuentaId = cuentaId;
     }
+
+    public String getNumeroCuenta() { return numeroCuenta; }
+    public void setNumeroCuenta(String numeroCuenta) { this.numeroCuenta = numeroCuenta; }
+
+    public Double getSaldoActual() { return saldoActual; }
+    public void setSaldoActual(Double saldoActual) { this.saldoActual = saldoActual; }
+
+    public String getClienteNombre() { return clienteNombre; }
+    public void setClienteNombre(String clienteNombre) { this.clienteNombre = clienteNombre; }
+
+    public Boolean getEstadoCuenta() { return estadoCuenta; }
+    public void setEstadoCuenta(Boolean estadoCuenta) { this.estadoCuenta = estadoCuenta; }
 }

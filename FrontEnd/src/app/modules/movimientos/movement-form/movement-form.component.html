@@ -1,0 +1,91 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <div class="form-group mt-2">
+    <label>Cuenta</label>
+    <input
+      type="text"
+      [(ngModel)]="accountSearch"
+      (input)="filterAccounts()"
+      placeholder="Buscar por número de cuenta"
+      class="search-box"
+      [ngModelOptions]="{ standalone: true }"
+    />
+
+    <select
+      class="mt-2"
+      formControlName="cuentaId"
+      (change)="setSaldoInicial()"
+      required
+    >
+      <option value="" disabled selected>Seleccionar cuenta</option>
+      <option *ngFor="let account of filteredAccounts" [value]="account.id">
+        {{ account.numeroCuenta }} - {{ account.clienteNombre }}
+      </option>
+    </select>
+
+    <div
+      class="error"
+      *ngIf="form.get('cuentaId')?.invalid && form.get('cuentaId')?.touched"
+    >
+      Cuenta requerida
+    </div>
+  </div>
+
+  <!-- Campo de saldo solo lectura -->
+  <div class="form-group">
+    <label>Saldo Inicial</label>
+    <input formControlName="saldo" type="number" readonly />
+    <div
+      class="error"
+      *ngIf="form.get('saldo')?.invalid && form.get('saldo')?.touched"
+    >
+      Saldo requerido y no puede ser negativo
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Fecha</label>
+    <input formControlName="fecha" type="datetime-local" />
+    <div
+      class="error"
+      *ngIf="form.get('fecha')?.invalid && form.get('fecha')?.touched"
+    >
+      Fecha requerida
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Tipo de Movimiento</label>
+    <select formControlName="tipoMovimiento">
+      <option value="" disabled selected>Seleccionar tipo</option>
+      <option value="Deposito">Depósito</option>
+      <option value="Retiro">Retiro</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="
+        form.get('tipoMovimiento')?.invalid &&
+        form.get('tipoMovimiento')?.touched
+      "
+    >
+      Tipo de movimiento requerido
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Valor</label>
+    <input formControlName="valor" type="number" />
+    <div
+      class="error"
+      *ngIf="form.get('valor')?.invalid && form.get('valor')?.touched"
+    >
+      Valor requerido y no puede ser negativo
+    </div>
+  </div>
+
+  <div class="form-actions mt-2">
+    <button class="btn-create mr-1" type="submit" [disabled]="form.invalid">
+      Guardar
+    </button>
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

@@ -1,0 +1,47 @@
+<section class="cuentas-page">
+  <div class="page-header">
+    <h2>Movimientos</h2>
+    <button class="primary" (click)="createMovement()">Nuevo</button>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Buscar por nombre o identificación" />
+  </div>
+
+  <app-table
+    [colLabels]="[
+      'Fecha',
+      'Cliente',
+      'Número de cuenta',
+      'Tipo',
+      'Saldo Inicial',
+      'Estado',
+      'Movimiento',
+      'Saldo Disponible'
+    ]"
+    [colNames]="[
+      'fecha',
+      'clienteNombre',
+      'numeroCuenta',
+      'tipoMovimiento',
+      'saldo',
+      'estadoCuenta',
+      'valor',
+      'saldoActual'
+    ]"
+    [data]="movimientos"
+    (onEdit)="editMovimiento($event)"
+    (onDelete)="deleteMovimiento($event)"
+  >
+  </app-table>
+</section>
+
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-content">
+    <app-movement-form
+      [movement]="movementSelected"
+      (onSubmit)="saveMovement($event)"
+      (onCancel)="closeModal()"
+    ></app-movement-form>
+  </div>
+</div>

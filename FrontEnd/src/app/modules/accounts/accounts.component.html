@@ -1,7 +1,7 @@
 <section class="cuentas-page">
   <div class="page-header">
     <h2>Cuentas</h2>
-    <button class="primary">Nuevo</button>
+    <button class="primary" (click)="createAccount()">Nuevo</button>
   </div>
 
   <div class="search-bar">
@@ -29,3 +29,13 @@
   >
   </app-table>
 </section>
+
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-content">
+    <app-account-form
+      [account]="accountSelected"
+      (onSubmit)="saveAccount($event)"
+      (onCancel)="closeModal()"
+    ></app-account-form>
+  </div>
+</div>

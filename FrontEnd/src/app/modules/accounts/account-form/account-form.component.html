@@ -1,0 +1,83 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <div class="form-group">
+    <label>Número de Cuenta</label>
+    <input formControlName="numeroCuenta" type="text" />
+    <div
+      class="error"
+      *ngIf="
+        form.get('numeroCuenta')?.invalid && form.get('numeroCuenta')?.touched
+      "
+    >
+      El número de cuenta es requerido
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Tipo de Cuenta</label>
+    <select formControlName="tipoCuenta">
+      <option value="" disabled selected>Seleccionar tipo de cuenta</option>
+      <option value="Ahorros">Ahorros</option>
+      <option value="Corriente">Corriente</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="form.get('tipoCuenta')?.invalid && form.get('tipoCuenta')?.touched"
+    >
+      El tipo de cuenta es requerido
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Saldo Inicial</label>
+    <input formControlName="saldoInicial" type="number" />
+    <div
+      class="error"
+      *ngIf="
+        form.get('saldoInicial')?.invalid && form.get('saldoInicial')?.touched
+      "
+    >
+      El saldo inicial es requerido
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Estado</label>
+    <select formControlName="estado">
+      <option [value]="true">Activo</option>
+      <option [value]="false">Inactivo</option>
+    </select>
+  </div>
+
+  <div class="form-group mt-2">
+    <label>Cliente</label>
+    <input
+      type="text"
+      [(ngModel)]="clientSearch"
+      (input)="filterClients()"
+      placeholder="Buscar por nombre o identificación"
+      class="search-box"
+      [ngModelOptions]="{ standalone: true }"
+    />
+
+    <select class="mt-2" formControlName="clienteId" required>
+      <option value="" disabled selected>Seleccionar cliente</option>
+      <option *ngFor="let client of filteredClients" [value]="client.id">
+        {{ client.nombre }} - {{ client.identificacion }}
+      </option>
+    </select>
+
+    <div
+      class="error"
+      *ngIf="form.get('clienteId')?.invalid && form.get('clienteId')?.touched"
+    >
+      Cliente requerido
+    </div>
+  </div>
+
+  <div class="form-actions mt-2">
+    <button class="btn-create mr-1" type="submit" [disabled]="form.invalid">
+      Guardar
+    </button>
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

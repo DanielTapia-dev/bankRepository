@@ -1,4 +1,4 @@
-import { Movimiento } from './movimientos';
+import { Movement } from './movements';
 
 export interface Account {
   id?: number;
@@ -9,5 +9,5 @@ export interface Account {
   clienteId: number;
   clienteNombre: string;
   clienteIdentificacion: string;
-  movimientos?: Movimiento[];
+  movimientos?: Movement[];
 }

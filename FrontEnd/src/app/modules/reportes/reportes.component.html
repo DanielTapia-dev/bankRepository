@@ -1,1 +1,38 @@
-<p>reportes works!</p>
+<div class="report-form">
+  <label>ID Cliente:</label>
+  <input type="number" [(ngModel)]="clienteId" />
+
+  <label>Fecha Inicio:</label>
+  <input type="datetime-local" [(ngModel)]="fechaInicio" />
+
+  <label>Fecha Fin:</label>
+  <input type="datetime-local" [(ngModel)]="fechaFin" />
+
+  <div class="form-actions mt-2">
+    <button (click)="loadReport()">Generar Reporte</button>
+    <button (click)="downloadPdf()">Descargar PDF</button>
+  </div>
+</div>
+
+<div class="report-table mt-4" *ngIf="reportes.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Número de Cuenta</th>
+        <th>Saldo Inicial</th>
+        <th>Total Créditos</th>
+        <th>Total Débitos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reportes">
+        <td>{{ report.nombreCliente }}</td>
+        <td>{{ report.numeroCuenta }}</td>
+        <td>{{ report.saldoInicial | currency }}</td>
+        <td>{{ report.totalCreditos | currency }}</td>
+        <td>{{ report.totalDebitos | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -26,4 +26,8 @@ export class TableComponent {
   delete(id: number) {
     this.onDelete.emit(id);
   }
+
+  isDate(value: any): boolean {
+    return !isNaN(Date.parse(value));
+  }
 }

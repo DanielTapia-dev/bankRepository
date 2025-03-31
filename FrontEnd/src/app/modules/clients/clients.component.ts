@@ -36,7 +36,7 @@ export class ClientsComponent implements OnInit {
   deleteClient(id: number) {
     this.clientService.delete(id).subscribe({
       next: () => {
-        this.alertService.success('Client eliminado');
+        this.alertService.success('Cliente eliminado');
         this.loadClients();
       },
       error: (err) => {
@@ -49,7 +49,7 @@ export class ClientsComponent implements OnInit {
     if (this.clientSelected) {
       this.clientService.update(client.id!, client).subscribe({
         next: () => {
-          this.alertService.success('Client Modificado');
+          this.alertService.success('Cliente Modificado');
           this.loadClients();
           this.closeModal();
         },
@@ -60,7 +60,7 @@ export class ClientsComponent implements OnInit {
     } else {
       this.clientService.create(client).subscribe({
         next: () => {
-          this.alertService.success('Client Agregado');
+          this.alertService.success('Cliente Agregado');
           this.loadClients();
           this.closeModal();
         },

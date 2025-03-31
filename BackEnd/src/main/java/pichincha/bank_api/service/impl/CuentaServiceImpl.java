@@ -68,6 +68,10 @@ public class CuentaServiceImpl implements CuentaService {
             throw new DuplicateResourceException("cuenta", "número de cuenta", cuentaDTO.getNumeroCuenta());
         }
 
+        if (cuentaDTO.getSaldoInicial() < 0) {
+            throw new IllegalArgumentException("El saldo inicial no puede ser negativo");
+        }
+
         Cuenta cuenta = toEntity(cuentaDTO);
         return toDTO(cuentaRepository.save(cuenta));
     }
@@ -76,6 +80,16 @@ public class CuentaServiceImpl implements CuentaService {
     public CuentaDTO update(Long id, CuentaDTO cuentaDTO) {
         Cuenta cuenta = cuentaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
+
+        cuentaRepository.findByNumeroCuenta(cuentaDTO.getNumeroCuenta()).ifPresent(otro -> {
+            if (!otro.getId().equals(id)) {
+                throw new DuplicateResourceException("cuenta", "numero", cuentaDTO.getNumeroCuenta());
+            }
+        });
+
+        if (cuentaDTO.getSaldoInicial() < 0) {
+            throw new IllegalArgumentException("El saldo inicial no puede ser negativo");
+        }
 
         cuenta.setNumeroCuenta(cuentaDTO.getNumeroCuenta());
         cuenta.setTipoCuenta(cuentaDTO.getTipoCuenta());

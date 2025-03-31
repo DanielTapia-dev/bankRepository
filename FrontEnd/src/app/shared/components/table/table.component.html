@@ -9,7 +9,12 @@
     <tbody>
       <tr *ngFor="let item of data">
         <td *ngFor="let col of colNames">
-          {{ item[col] }}
+          <ng-container *ngIf="col === 'fecha'; else normal">
+            {{ item[col] | date : "dd/MM/yyyy HH:mm" }}
+          </ng-container>
+          <ng-template #normal>
+            {{ item[col] }}
+          </ng-template>
         </td>
         <td>
           <button class="icon-button" title="Editar" (click)="edit(item)">

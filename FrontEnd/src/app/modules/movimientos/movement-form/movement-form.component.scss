@@ -1,0 +1,11 @@
+@import "src/styles/variables";
+
+.error {
+  color: $error;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.btn-create {
+  background-color: $succeess;
+}
