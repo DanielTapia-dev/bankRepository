@@ -21,7 +21,7 @@ public interface MovimientoRepository extends JpaRepository<Movimiento, Long> {
     JOIN cuentas a ON a.id = m.cuenta_id
     JOIN clientes c ON c.id = a.cliente_id
     JOIN personas p ON p.id = c.id
-    WHERE c.id = :clienteId
+    WHERE p.identificacion = CAST(:clienteId AS VARCHAR)
       AND m.fecha BETWEEN :fechaInicio AND :fechaFin
     GROUP BY p.nombre, a.numero_cuenta, a.saldo_inicial
 """, nativeQuery = true)
