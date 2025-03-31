@@ -4,8 +4,8 @@ Este es un sistema bancario básico desarrollado con **Spring Boot**, **PostgreS
 
 ## 🛠️ Tecnologías usadas
 
-- **Backend:** Spring Boot 3, JPA, PostgreSQL, Docker
-- **Frontend:** Angular 16, Bootstrap
+- **Backend:** Spring Boot 3, JPA, PostgreSQL, Docker, JAVA 17
+- **Frontend:** Angular 14
 - **Base de datos:** PostgreSQL 15
 - **Orquestación:** Docker Compose
 
