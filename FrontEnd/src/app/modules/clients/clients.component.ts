@@ -12,6 +12,7 @@ export class ClientsComponent implements OnInit {
   clients: Client[] = [];
   clientSelected: Client | null = null;
   showModal: boolean = false;
+  filteredClients: Client[] = [];
 
   constructor(
     private clientService: ClientsService,
@@ -25,6 +26,7 @@ export class ClientsComponent implements OnInit {
   loadClients() {
     this.clientService.getAll().subscribe((resp) => {
       this.clients = resp;
+      this.filteredClients = resp;
     });
   }
 
@@ -78,5 +80,14 @@ export class ClientsComponent implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
+  }
+
+  applyFilter(term: string) {
+    const lowerTerm = term.toLowerCase();
+    this.filteredClients = this.clients.filter((item) =>
+      Object.values(item).some((value) =>
+        value?.toString().toLowerCase().includes(lowerTerm)
+      )
+    );
   }
 }

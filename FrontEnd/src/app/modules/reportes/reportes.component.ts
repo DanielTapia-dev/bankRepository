@@ -10,7 +10,7 @@ import { ReportService } from 'src/app/shared/services/report.service';
 })
 export class ReportesComponent {
   reportes: Report[] = [];
-  clienteId: number = 0;
+  clienteId!: number;
   fechaInicio!: string;
   fechaFin!: string;
 

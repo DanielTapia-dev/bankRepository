@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: pichincha-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dannyalejo7123tapia
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - fullstack
+    ports:
+      - '5432:5432'
+
+  backend:
+    build: ./Backend
+    ports:
+      - '8081:8081'
+    depends_on:
+      - postgres
+    networks:
+      - fullstack
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/pichincha-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=dannyalejo7123tapia
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  frontend:
+    build: ./FrontEnd
+    ports:
+      - '4200:80'
+    depends_on:
+      - backend
+    networks:
+      - fullstack
+
+volumes:
+  postgres-data:
+
+networks:
+  fullstack:
+    driver: bridge

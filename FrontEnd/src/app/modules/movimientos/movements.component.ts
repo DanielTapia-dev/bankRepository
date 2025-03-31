@@ -12,6 +12,7 @@ export class MovementsComponent implements OnInit {
   movimientos: Movement[] = [];
   showModal: boolean = false;
   movementSelected: Movement | null = null;
+  filteredMovements: Movement[] = [];
 
   constructor(
     private movementsService: MovementService,
@@ -25,6 +26,7 @@ export class MovementsComponent implements OnInit {
   loadMovements() {
     this.movementsService.getAll().subscribe((resp) => {
       this.movimientos = resp;
+      this.filteredMovements = resp;
     });
   }
 
@@ -78,5 +80,14 @@ export class MovementsComponent implements OnInit {
         },
       });
     }
+  }
+
+  applyFilter(term: string) {
+    const lowerTerm = term.toLowerCase();
+    this.filteredMovements = this.movimientos.filter((item) =>
+      Object.values(item).some((value) =>
+        value?.toString().toLowerCase().includes(lowerTerm)
+      )
+    );
   }
 }

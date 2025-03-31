@@ -12,6 +12,7 @@ export class AccountsComponent implements OnInit {
   accounts: Account[] = [];
   showModal: boolean = false;
   accountSelected: Account | null = null;
+  filteredAccounts: Account[] = [];
 
   constructor(
     private accountsService: AccountService,
@@ -25,6 +26,7 @@ export class AccountsComponent implements OnInit {
   loadAccounts() {
     this.accountsService.getAll().subscribe((resp) => {
       this.accounts = resp;
+      this.filteredAccounts = resp;
     });
   }
 
@@ -78,5 +80,14 @@ export class AccountsComponent implements OnInit {
         },
       });
     }
+  }
+
+  applyFilter(term: string) {
+    const lowerTerm = term.toLowerCase();
+    this.filteredAccounts = this.accounts.filter((item) =>
+      Object.values(item).some((value) =>
+        value?.toString().toLowerCase().includes(lowerTerm)
+      )
+    );
   }
 }

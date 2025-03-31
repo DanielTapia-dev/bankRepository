@@ -9,8 +9,8 @@
   <input type="datetime-local" [(ngModel)]="fechaFin" />
 
   <div class="form-actions mt-2">
-    <button (click)="loadReport()">Generar Reporte</button>
-    <button (click)="downloadPdf()">Descargar PDF</button>
+    <button class="btn-generate" (click)="loadReport()">Generar Reporte</button>
+    <button class="btn-pdf" (click)="downloadPdf()">Descargar PDF</button>
   </div>
 </div>
 

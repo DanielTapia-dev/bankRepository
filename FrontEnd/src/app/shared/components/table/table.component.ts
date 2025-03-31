@@ -13,10 +13,30 @@ export class TableComponent {
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDelete = new EventEmitter<number>();
 
+  pageSize = 10;
+  currentPage = 1;
+
   constructor() {
     if (!this.colNames) {
       this.colNames = this.colLabels;
     }
+  }
+
+  paginatedData() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.data.slice(start, start + this.pageSize);
+  }
+
+  totalPages() {
+    return Math.ceil(this.data.length / this.pageSize);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages()) this.currentPage++;
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) this.currentPage--;
   }
 
   edit(item: any) {
